@@ -1,0 +1,23 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://175.178.192.115:3306/springboot?useUnicode=true&characterEncoding=utf8&useSSL=true
+    username: springboot
+    password: cwlsld
+
+  devtools:
+    restart:
+      enabled: false  #设置开启热部署
+      additional-paths: src/main/java #重启目录
+      exclude: WEB-INF/**  #排除文件(不重启项目)
+  freemarker:
+    cache: false    #页面不加载缓存，修改即时生效
+
+mybatis-plus:
+  mapper-locations: classpath:com/Mapper/xml/*.xml
+  type-aliases-package: com.User
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+server:
+  port: 8088
+
