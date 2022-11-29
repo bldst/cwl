@@ -18,4 +18,6 @@ public interface UserMapper extends BaseMapper<User> {
         String login(User user);
          void updateTokenUser(User user);
         String selectByAccount(@Param("account") String account);
+        void LogoutUser(String token);
+        boolean selectTokenString (String token);
 }

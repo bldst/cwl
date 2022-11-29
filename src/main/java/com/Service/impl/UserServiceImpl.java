@@ -85,5 +85,14 @@ public class UserServiceImpl implements UserService {
         return null;
     }
 
+    @Override
+//    用户注销，设置数据库对应token为空
+    public void LogoutUser(String token) {
+        try {
+            userMapper.LogoutUser(token);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
+    }
 }

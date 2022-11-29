@@ -13,4 +13,5 @@ public interface UserService {
     String Register(User user);
     String login(User user);
     String CheckToken(HttpServletRequest request);
+    void LogoutUser(String token);
 }

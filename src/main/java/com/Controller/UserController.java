@@ -121,5 +121,24 @@ public class UserController {
     public void AdminLoginToken(@RequestParam("account")String name,@RequestParam("psd") String psd) {
 
     }
+    @DeleteMapping("/login/delete")
+    @ResponseBody
+    ResultMsg LoginDelete(HttpServletRequest request){
+        String token = request.getHeader("token");
 
+        //从数据库校验
+        try {
+
+            boolean Havetoken = userMapper.selectTokenString(token);
+            if (!Havetoken)
+                return ResultMsg.error(ResultStatusEnum.ERROR,"token不在数据库");
+        } catch (Exception e) {
+            e.printStackTrace();
+
+        }
+
+        userService.LogoutUser(token);//清除token
+
+        return ResultMsg.ok(ResultStatusEnum.LOGOUT_SUCCESS,null);
+    }
 }

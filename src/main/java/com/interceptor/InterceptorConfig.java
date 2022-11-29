@@ -11,7 +11,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupp
 public class InterceptorConfig extends WebMvcConfigurationSupport {
 
     @Override public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(new LogCostInterceptor()).addPathPatterns("/index/CheckToken/**"); super.addInterceptors(registry);
+        registry.addInterceptor(new LogCostInterceptor()).addPathPatterns("/index/login/delete/**"); super.addInterceptors(registry);
         System.out.println("拦截");
 
     }
