@@ -9,4 +9,5 @@ public class User {
     private Integer id;
     private String account;
     private String psd;
+    private String token;
 }

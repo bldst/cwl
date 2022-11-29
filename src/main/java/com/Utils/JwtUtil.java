@@ -13,7 +13,7 @@ public class JwtUtil {
     /**
      * 过期5分钟
      * */
-    private static final long EXPIRE_TIME = 5 * 60 * 1000;
+    private static final long EXPIRE_TIME = 1 * 60 * 1000;
 
     /**
      * jwt密钥
@@ -85,7 +85,7 @@ public class JwtUtil {
                     .build();
             verifier.verify(token);
             return true;
-        }catch (JWTVerificationException e) {
+        }catch (Exception e) {
             throw new RuntimeException("token 无效，请重新获取");
         }
     }

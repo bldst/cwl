@@ -5,7 +5,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 //@SpringBootApplication(scanBasePackages = "com.Controller")
-@SpringBootApplication(scanBasePackages = {"com.Controller","com.Service"})
+@SpringBootApplication(scanBasePackages = {"com.Controller","com.Service","com.interceptor"})
 @MapperScan("com.Mapper")
 //@ComponentScan(basePackages = "com.Service")
 public class CwlApplication {
