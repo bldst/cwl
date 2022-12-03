@@ -1,9 +1,22 @@
 spring:
+  mvc:
+    pathmatch:
+      # 配置策略
+      matching-strategy: ant-path-matcher
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://175.178.192.115:3306/springboot?useUnicode=true&characterEncoding=utf8&useSSL=true
     username: springboot
     password: cwlsld
+    hikari:
+      connection-timeout: 10000
+      validation-timeout: 3000
+      idle-timeout: 60000
+      login-timeout: 5
+      max-lifetime: 60000
+      maximum-pool-size: 10
+      minimum-idle: 5
+      read-only: false
 
   devtools:
     restart:
@@ -18,6 +31,13 @@ mybatis-plus:
   type-aliases-package: com.User
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    map-underscore-to-camel-case: true
 server:
   port: 8088
+  servlet:
+    encoding:
+      charset: utf-8
+      enabled: true
+      force: true
+
 

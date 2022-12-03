@@ -3,6 +3,7 @@ package com.Service.impl;
 import com.Mapper.UserMapper;
 import com.Service.UserService;
 import com.User.User;
+import com.User.joinMatch;
 import com.Utils.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -36,12 +37,15 @@ public class UserServiceImpl implements UserService {
     //注册
     @Override
     public String Register(User user) {
+        //查询数据库里受否存在相同账户
        if (userMapper.getByAccount(user.getAccount())==null){
-           int i = user.getPsd().matches(".*\\d+.*") ? 1 : 0;
-           int j = user.getPsd().matches(".*[a-zA-Z]+.*") ? 1 : 0;
-           int l = user.getPsd().length();
+                //不存在
+           int i = user.getPsd().matches(".*\\d+.*") ? 1 : 0;//有数字
+           int j = user.getPsd().matches(".*[a-zA-Z]+.*") ? 1 : 0;//有字母
+           int l = user.getPsd().length();//长度
            if (i==1&&j==1&&l>5)
            {
+               //满足条件，注册
                userMapper.insert(user);
                return "1";
            }
@@ -52,7 +56,7 @@ public class UserServiceImpl implements UserService {
     }
                 //登陆
     @Override
-    public String login(User user) {
+    public Map login(User user) {
         Integer id = Integer.valueOf(userMapper.login(user));
         if (id!=null){
             //生成token
@@ -74,8 +78,10 @@ public class UserServiceImpl implements UserService {
             } catch (Exception e) {
                 System.out.println("token更新出错"+e);
             }
-
-            return token;//成功返回token
+            Map map=new HashMap<>();
+            map.put("token",token);
+            map.put("userId",userId);
+            return map;//成功返回token 和id的 map
         }
         return null;//失败返回null
     }
@@ -93,6 +99,22 @@ public class UserServiceImpl implements UserService {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+    }
+
+    @Override
+    //修改密码
+    public void updatePsd(User user) {
+        try {
+            userMapper.updatePsd(user);
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println(user.getToken());
+        }
+    }
+            //报名添加表
+    @Override
+    public void joinMatch(joinMatch joinMatch) {
 
     }
 }

@@ -2,11 +2,21 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.Mapper.UserMapper">
+    <insert id="joinMatch">
+        insert into matchjoin (matchid, sutdent_id)
+        values (#{matchid},#{sutdent_id});
+    </insert>
     <update id="LogoutUser">
         update User
         set token = null
         where token=#{token};
     </update>
+    <delete id="outMatch">
+        delete
+        from matchjoin
+        where matchid=#{matchid} and sutdent_id=#{sutdent_id};
+
+    </delete>
 
     <select id="login" parameterType="com.User.User" resultType="java.lang.String">
         select id
@@ -38,12 +48,20 @@
         select count(token)
         from User where token=#{token};
     </select>
+    <select id="getMatchid" resultType="com.User.joinMatch">
+        select matchid,sutdent_id
+        from matchjoin where sutdent_id=#{sutdent_id};
+
+    </select>
 
     <update id="updateTokenUser" >
         update User
         set token = #{token}
         where id = #{id};
 
+    </update>
+    <update id="updatePsd">
+        update User set psd=#{psd} where id=#{id} and token=#{token}
     </update>
 </mapper>
 
