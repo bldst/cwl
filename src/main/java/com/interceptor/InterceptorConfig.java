@@ -17,6 +17,9 @@ public class InterceptorConfig extends WebMvcConfigurationSupport {
                 .excludePathPatterns("/index/register/**")
                 .excludePathPatterns("/index/login/**")
                 .excludePathPatterns("/index/getMatch/**");
+                //登陆权限拦截器
+        registry.addInterceptor(new AuthorizationInterceptor())
+                .addPathPatterns("/admin/change/**");
 
 
         super.addInterceptors(registry);

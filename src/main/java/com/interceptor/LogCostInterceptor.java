@@ -29,8 +29,7 @@ public class LogCostInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 
 
-        HandlerMethod handlerMethod=(HandlerMethod)handler;
-        Method method = handlerMethod.getMethod();
+
 
         //放行options请求： OPTIONS的预请求(Preflighted Request), 用于试探服务端是否能接受真正的请求
         String methodRequest = request.getMethod();
@@ -48,16 +47,6 @@ public class LogCostInterceptor implements HandlerInterceptor {
             //签名校验
 
             JwtUtil.checkSign(token);
-
-            Map<String, Object> info = JwtUtil.getInfo(token);
-            String userType = (String) info.get("userType");
-            System.out.println("登陆权限为："+userType);
-            //验证登陆角色是否匹配
-            Permissions permissionsAnnotation=method.getAnnotation(Permissions.class);
-            if (!permissionsAnnotation.role().equals(userType)){
-                response.getWriter().println("无权限操作");
-                return false;
-            }
 
             System.out.println("token校验通过");
 
