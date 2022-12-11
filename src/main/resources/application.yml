@@ -1,4 +1,6 @@
 spring:
+  jackson:
+    time-zone: GMT+8
   mvc:
     pathmatch:
       # 配置策略

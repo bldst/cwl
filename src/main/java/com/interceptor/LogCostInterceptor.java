@@ -2,16 +2,20 @@ package com.interceptor;
 
 import com.Mapper.UserMapper;
 import com.Utils.JwtUtil;
+import com.Utils.Permissions;
 import com.Utils.ResultMsg;
 import com.Utils.ResultStatusEnum;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.PrintWriter;
+import java.lang.reflect.Method;
+import java.util.Map;
 
 
 /**
@@ -24,9 +28,13 @@ public class LogCostInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 
-    //放行options请求： OPTIONS的预请求(Preflighted Request), 用于试探服务端是否能接受真正的请求
-        String method = request.getMethod();
-        if (method.equalsIgnoreCase("OPTIONS"))
+
+        HandlerMethod handlerMethod=(HandlerMethod)handler;
+        Method method = handlerMethod.getMethod();
+
+        //放行options请求： OPTIONS的预请求(Preflighted Request), 用于试探服务端是否能接受真正的请求
+        String methodRequest = request.getMethod();
+        if (methodRequest.equalsIgnoreCase("OPTIONS"))
             return true;
         //校验token,判断合法
 
@@ -40,6 +48,16 @@ public class LogCostInterceptor implements HandlerInterceptor {
             //签名校验
 
             JwtUtil.checkSign(token);
+
+            Map<String, Object> info = JwtUtil.getInfo(token);
+            String userType = (String) info.get("userType");
+            System.out.println("登陆权限为："+userType);
+            //验证登陆角色是否匹配
+            Permissions permissionsAnnotation=method.getAnnotation(Permissions.class);
+            if (!permissionsAnnotation.role().equals(userType)){
+                response.getWriter().println("无权限操作");
+                return false;
+            }
 
             System.out.println("token校验通过");
 

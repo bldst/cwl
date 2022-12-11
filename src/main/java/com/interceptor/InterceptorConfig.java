@@ -13,13 +13,14 @@ public class InterceptorConfig extends WebMvcConfigurationSupport {
 
     @Override public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(new LogCostInterceptor()).addPathPatterns("/index/**")
+                .addPathPatterns("/admin/change/**")
                 .excludePathPatterns("/index/register/**")
                 .excludePathPatterns("/index/login/**")
                 .excludePathPatterns("/index/getMatch/**");
 
 
         super.addInterceptors(registry);
-        System.out.println("拦截");
+        System.out.println("=======拦截器启动成功====");
 
     }
 

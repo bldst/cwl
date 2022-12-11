@@ -18,26 +18,26 @@
 
     </delete>
 
-    <select id="login" parameterType="com.User.User" resultType="java.lang.String">
+    <select id="login" parameterType="com.entiy.User" resultType="java.lang.String">
         select id
         from User
         where psd = #{psd}
           and account = #{account}
 
     </select>
-    <select id="getByAccount" parameterType="java.lang.String" resultType="com.User.User">
+    <select id="getByAccount" parameterType="java.lang.String" resultType="com.entiy.User">
         select id
         from User
         where account = #{account}
 
     </select>
-    <select id="get" parameterType="int" resultType="com.User.User">
+    <select id="get" parameterType="int" resultType="com.entiy.User">
         select *
         from User
         where id = #{id}
     </select>
     <select id="selectByAccount" resultType="java.lang.String"/>
-    <select id="selectOne" parameterType="com.User.User" resultType="com.User.User">
+    <select id="selectOne" parameterType="com.entiy.User" resultType="com.entiy.User">
         select id, account
         from User
         where psd = #{psd}
@@ -48,7 +48,7 @@
         select count(token)
         from User where token=#{token};
     </select>
-    <select id="getMatchid" resultType="com.User.joinMatch">
+    <select id="getMatchid" resultType="com.entiy.joinMatch">
         select matchid,sutdent_id
         from matchjoin where sutdent_id=#{sutdent_id};
 

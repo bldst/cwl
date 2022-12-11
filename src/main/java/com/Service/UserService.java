@@ -1,7 +1,7 @@
 package com.Service;
 
-import com.User.User;
-import com.User.joinMatch;
+import com.entiy.User;
+import com.entiy.joinMatch;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Map;

@@ -1,6 +1,5 @@
-package com.User;
+package com.entiy;
 
-import java.util.ArrayList;
 import java.util.List;
 public class Data
 {

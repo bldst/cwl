@@ -2,8 +2,8 @@ package com.Service.impl;
 
 import com.Mapper.UserMapper;
 import com.Service.UserService;
-import com.User.User;
-import com.User.joinMatch;
+import com.entiy.User;
+import com.entiy.joinMatch;
 import com.Utils.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -66,7 +66,7 @@ public class UserServiceImpl implements UserService {
             Map<String, Object> info = new HashMap<>();
             info.put("username", user.getAccount());
             info.put("pass", user.getPsd());
-
+            info.put("userType","user");//定义登陆类型为user
             //生成JWT字符串
             String token = JwtUtil.sign(userId, info);
             //保存Token
@@ -81,6 +81,7 @@ public class UserServiceImpl implements UserService {
             Map map=new HashMap<>();
             map.put("token",token);
             map.put("userId",userId);
+
             return map;//成功返回token 和id的 map
         }
         return null;//失败返回null

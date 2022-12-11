@@ -1,4 +1,4 @@
-package com.User;
+package com.entiy;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
@@ -10,4 +10,5 @@ public class User {
     private String account;
     private String psd;
     private String token;
+
 }

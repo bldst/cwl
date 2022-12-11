@@ -1,7 +1,7 @@
 package com.Mapper;
 
-import com.User.User;
-import com.User.joinMatch;
+import com.entiy.User;
+import com.entiy.joinMatch;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
