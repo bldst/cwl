@@ -6,10 +6,15 @@ import com.Utils.ResultMsg;
 import com.Utils.ResultStatusEnum;
 import com.entiy.AdminUser;
 import com.entiy.User;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
@@ -51,4 +56,13 @@ public class AdminUserController {
         return ResultMsg.ok(ResultStatusEnum.UPDATE_SUCCESS);
     }
 
+    @ApiOperation(value = "分页查询")
+    @ApiImplicitParam(name = "token", required = false, paramType = "header", dataType = "String")
+    @GetMapping("/getall")
+    @Permissions(role = "admin")
+     PageInfo<User> GetAll(Integer pageNum, Integer pageSize) {
+        PageInfo<User> userPageInfo = adminUserService.GetAll(pageNum, pageSize);
+
+        return userPageInfo;
+    }
 }

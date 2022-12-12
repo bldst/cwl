@@ -11,15 +11,18 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupp
 @Configuration
 public class InterceptorConfig extends WebMvcConfigurationSupport {
 
-    @Override public void addInterceptors(InterceptorRegistry registry) {
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(new LogCostInterceptor()).addPathPatterns("/index/**")
                 .addPathPatterns("/admin/change/**")
                 .excludePathPatterns("/index/register/**")
                 .excludePathPatterns("/index/login/**")
                 .excludePathPatterns("/index/getMatch/**");
-                //登陆权限拦截器
+        //登陆权限拦截器
         registry.addInterceptor(new AuthorizationInterceptor())
-                .addPathPatterns("/admin/change/**");
+                .addPathPatterns("/admin/change/**")
+                .addPathPatterns("/admin/getall/**")
+                .excludePathPatterns("/admin/login/**");
 
 
         super.addInterceptors(registry);

@@ -14,4 +14,5 @@ public interface AdminUserMapper extends BaseMapper<User> {
     String login(AdminUser adminUser);
     void updateTokenUser(AdminUser adminUser);
     void updateUserByid(User user);
+    List<User> getAllPages();
 }

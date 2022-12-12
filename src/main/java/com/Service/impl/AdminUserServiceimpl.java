@@ -5,6 +5,8 @@ import com.Service.AdminUserService;
 import com.Utils.JwtUtil;
 import com.entiy.AdminUser;
 import com.entiy.User;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,6 +15,7 @@ import org.springframework.stereotype.Service;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 @Service
 public class AdminUserServiceimpl implements AdminUserService {
@@ -34,6 +37,16 @@ public class AdminUserServiceimpl implements AdminUserService {
             return "0";
         }
         return "1";
+    }
+
+    @Override
+    public PageInfo<User> GetAll(Integer pageNum, Integer pageSize) {
+        PageHelper.startPage(pageNum,pageSize);
+        List<User> users=adminUserMapper.getAllPages();
+        PageInfo<User> userPageInfo = new PageInfo<>(users);
+
+
+        return userPageInfo;
     }
 
     @Override

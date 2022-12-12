@@ -31,6 +31,11 @@
           and account = #{account}
 
     </select>
+    <select id="getAllPages" resultType="com.entiy.User">
+        select *
+        from User
+
+    </select>
 </mapper>
 
 

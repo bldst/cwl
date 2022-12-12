@@ -28,6 +28,11 @@ spring:
   freemarker:
     cache: false    #页面不加载缓存，修改即时生效
 
+  redis:
+    host: 175.178.192.115
+    port: 6379
+    password: cwlsld
+
 mybatis-plus:
   mapper-locations: classpath:com/Mapper/xml/*.xml
   type-aliases-package: com.User
@@ -41,5 +46,4 @@ server:
       charset: utf-8
       enabled: true
       force: true
-
 

@@ -21,12 +21,18 @@ public class AuthorizationInterceptor implements HandlerInterceptor {
         HandlerMethod handlerMethod=(HandlerMethod)handler;
         Method method = handlerMethod.getMethod();
 
-        String token = request.getHeader("token");
-        //签名校验
-
-        Map<String, Object> info = JwtUtil.getInfo(token);
-        String userType = (String) info.get("userType");
-        System.out.println("登陆权限为："+userType);
+        String userType = null;
+        try {
+            String token = request.getHeader("token");
+            //签名校验
+            Map<String, Object> info = JwtUtil.getInfo(token);
+            userType = (String) info.get("userType");
+            System.out.println("登陆权限为："+userType);
+        } catch (Exception e) {
+            e.printStackTrace();
+            response.getWriter().println("token校验失败无权限操作");
+            return false;
+        }
         //验证登陆角色是否匹配
         Permissions permissionsAnnotation=method.getAnnotation(Permissions.class);
         if (!permissionsAnnotation.role().equals(userType)){
