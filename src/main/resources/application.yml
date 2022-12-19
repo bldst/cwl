@@ -32,6 +32,7 @@ spring:
     host: 175.178.192.115
     port: 6379
     password: cwlsld
+    database: 0
 
 mybatis-plus:
   mapper-locations: classpath:com/Mapper/xml/*.xml

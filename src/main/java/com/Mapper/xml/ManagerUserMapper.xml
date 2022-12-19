@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.Mapper.ManagerUserMapper">
+
+    <select id="find1" resultMap="find2">
+        select *
+#                device.id,
+#                device.name,
+#                device.type,
+#                device.purchase_amount,
+#                device.create_user,
+#                device.update_time,
+#                manage_user.account
+
+        from device,
+             manage_user
+        where device.create_user = manage_user.id
+          and manage_user.id =
+              #{id};
+    </select>
+
+    <resultMap id="find2" type="com.entiy.Device">
+
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="type" column="type"/>
+        <result property="purchaseAmount" column="purchase_amount"/>
+        <result property="createUser" column="create_user"/>
+        <result property="updateTime" column="update_time"/>
+        <association property="manageUser"  javaType="com.entiy.manageUser">
+        <result property="account" column="account" />
+        </association>
+
+
+    </resultMap>
+</mapper>
+
+

@@ -1,19 +1,32 @@
-package com.Utils;
+package com.config;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTDecodeException;
 import com.auth0.jwt.exceptions.JWTVerificationException;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
 import java.util.Date;
 import java.util.Map;
-
+@Component
 public class JwtUtil {
     /**
      * 过期5分钟
      * */
-    private static final long EXPIRE_TIME = 40 * 60 * 1000;
+
+
+
+    private static long EXPIRE_TIME;
+
+    public static long getEXPIRE_TIME() {
+        return EXPIRE_TIME;
+    }
+    @Value("${JwtUtil.EXPIRE_TIME}")
+    public void setEXPIRE_TIME(long EXPIRE_TIME) {
+        this.EXPIRE_TIME = EXPIRE_TIME;
+    }
 
     /**
      * jwt密钥
@@ -28,7 +41,8 @@ public class JwtUtil {
      * */
     public static String sign(String userId, Map<String, Object> info) {
         try {
-            Date date = new Date(System.currentTimeMillis() + EXPIRE_TIME);
+
+            Date date = new Date(System.currentTimeMillis() + getEXPIRE_TIME());
             Algorithm algorithm = Algorithm.HMAC256(SECRET);
             return JWT.create()
                     //将userId保存到token里面

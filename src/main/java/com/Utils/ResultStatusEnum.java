@@ -10,6 +10,7 @@ public enum ResultStatusEnum {
      */
     SUCCESS(1, "成功"),
     LOGOUT_SUCCESS(1, "注销成功"),
+    LOGOUT_ERROR(0, "注销失败"),
     UPDATEPSD_SUCCESS(1,"密码更新成功"),
     register_SUCCESS(1, "注册成功"),
     DELETE_SUCCESS(1, "删除成功"),
@@ -18,6 +19,7 @@ public enum ResultStatusEnum {
     Login_SUCCESS(1,"登陆成功"),
     Login_ERROR(0,"登陆失败"),
     ERROR(0, "异常失败"),
+    PARAMS_ERROR(0,"参数错误"),
     SAVE_ERROR(0, "增加失败"),
     DELETE_ERROR(0, "删除失败"),
     UPDATE_ERROR(0, "更改失败"),

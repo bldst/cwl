@@ -1,13 +1,16 @@
 package com.example.cwl;
 
-import com.Mapper.AdminUserMapper;
-import com.Mapper.UserMapper;
+
+import com.Mapper.ManagerUserMapper;
+
+import com.entiy.DeviceWITHadmin;
 import com.entiy.User;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.redis.core.RedisTemplate;
 
 import java.util.List;
 
@@ -16,13 +19,23 @@ import java.util.List;
 class CwlApplicationTests {
 
 
+
   @Autowired
-    UserMapper userMapper;
+  private ManagerUserMapper managerUserMapper;
+  @Autowired
+  private RedisTemplate redisTemplate;
+
+
   @Test
-    public void getallpage(){
-      PageHelper.startPage(1,3);
-      List<User> users=userMapper.selectList(null);
-      PageInfo<User> userPageInfo = new PageInfo<>(users);
-      System.out.println(userPageInfo);
+  public void redis(){
+    String userId="618803202";
+    Object o = redisTemplate.opsForValue().get("token" + userId);
+    System.out.println(o);
+  }
+
+  @Test
+  public void fin1(){
+    List<DeviceWITHadmin> managerUserMapper1 = managerUserMapper.find1(String.valueOf(71));
+    System.out.println(managerUserMapper1);
   }
 }
